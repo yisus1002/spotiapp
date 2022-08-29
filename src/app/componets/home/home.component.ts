@@ -23,21 +23,23 @@ export class HomeComponent   {
     //   console.log(data)
     //   console.log(this.paises)
     // })
+    this.Spotify_Service.getToken()
     this.loading = true;
 
-
-    this.Spotify_Service.getNewReleases()
-    .subscribe((data:any) => {
-      this.nuevasCanciones=data ;
-      this.loading=false;
-      // console.log(data.albums.items)
-      console.log(this.nuevasCanciones)
-    
-    }, (err) => {
-      this.error= true;
-      this.loading=false;
-      this.mensajeError=err.error.error.message;
-    });
+    setTimeout(() => {
+      this.Spotify_Service.getNewReleases()
+      .subscribe((data:any) => {
+        this.nuevasCanciones=data ;
+        this.loading=false;
+        // console.log(data.albums.items)
+        console.log(this.nuevasCanciones)
+      
+      }, (err) => {
+        this.error= true;
+        this.loading=false;
+        this.mensajeError=err.error.error.message;
+      });
+    }, 1000);
   }
  
 }
